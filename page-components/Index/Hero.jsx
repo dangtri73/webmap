@@ -18,7 +18,13 @@ const Hero = () => {
               <ButtonLink className={styles.button}>Explore Feed</ButtonLink>
             </Link>
           </Container>
-          <Spacer axis="horizontal" size={1} />
+          <Spacer axis="horizontal" size={10} />
+          <Container>
+            <Link passHref href="/map">
+              <ButtonLink className={styles.button}>To Somerful Map</ButtonLink>
+            </Link>
+          </Container>
+          <Spacer axis="horizontal" size={10} />
           <Container>
             <ButtonLink
               href="https://github.com/hoangvvo/nextjs-mongodb-app"

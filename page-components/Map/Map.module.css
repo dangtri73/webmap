@@ -1,0 +1,135 @@
+.mapwrap {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 77px); /* calculate height of the screen minus the heading */
+}
+
+.map {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.marker_hover {
+  cursor: pointer; /* Change the cursor to a pointer icon on hover */
+}
+
+.mapboxgl_ctrl {
+  position: absolute;
+  top: 10%;
+  left: 90%;
+  transform: translate(-50%, -50%);
+  background: linear-gradient(to bottom right, #FF6347, #FF69B4);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Media query for small screens */
+@media (max-width: 768px) {
+  .mapboxgl_ctrl {
+    font-size: 5px;
+    padding: 8px 16px;
+  }
+}
+
+/* Media query for medium screens */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .mapboxgl_ctrl {
+    font-size: 12px;
+    padding: 10px 20px;
+  }
+}
+
+/* Media query for large screens */
+@media (min-width: 1025px) {
+  .mapboxgl_ctrl {
+    font-size: 15px;
+    padding: 12px 24px;
+  }
+}
+
+/* Container for the marker */
+.custom_marker {
+  position: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 100px;
+}
+
+/* Rectangle with arrow and text */
+.custom_marker .rectangle {
+  width: 100px;
+  height: 20px;
+  background-color: #616161;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Arrow inside the rectangle */
+.custom_marker .arrow {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 20px solid #616161;
+  transform: rotate(180deg);
+  margin-top: -10px;
+  z-index: -1;
+}
+
+/* Text inside the rectangle */
+.custom_marker .text {
+  color: white;
+  font-weight: 400;
+  font-size: 15px;
+  margin-top: 2px;
+  /* z-index: 1; */
+}
+
+/*********/
+
+/* Your existing CSS styles for custom_marker, rectangle, arrow, and text */
+
+/* Circle container */
+.circle_container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+  margin-top: -10px;
+}
+
+.circle_container .circle {
+  width: 30;
+  height: 30;
+  background-color: transparent;
+  background-image: var(--image-url); /* Dynamic image URL */
+  /* background-image: url('https://hft-staging.s3.ap-southeast-1.amazonaws.com/IMAGES/POST/1910543b1091e5c1fb-123457qweryu_thumbnail_small.png'); */
+  border-radius: 50%;
+}
+
+/* Define the stroke animation for the circle */
+@keyframes dash {
+  from {
+    stroke-dasharray: 50 100;
+  }
+  to {
+    stroke-dasharray: var(--percent, 0) 100;
+  }
+}
+
+.circle circle {
+  animation: dash 0.5s ease-in-out forwards; /* Adjust the duration as needed */
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
+
+
