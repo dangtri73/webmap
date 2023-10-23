@@ -8,7 +8,23 @@ export async function findPostsMap(db) {
         },
       },
       {
+        $lookup: {
+          from: 'sf_profiles',
+          localField: 'user',
+          foreignField: 'user',
+          as: 'profile',
+        },
+      },
+      { $unwind: '$profile' },
+      {
         $project: {
+          _id: 1,
+          profile: {
+            profileId: '$profile._id',
+            avatar: 1,
+            ring: 1,
+            userName: 1,
+          },
           coordinates: '$location.coordinates',
           content: '$content.default',
           createdAt: 1,

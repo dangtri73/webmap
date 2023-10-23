@@ -1,6 +1,41 @@
 import { ObjectId } from 'mongodb';
 import { dbProjectionUsers } from './user';
 
+export async function findPostDetail(db, id) {
+  const posts = await db
+    .collection('sf_posts')
+    .aggregate([
+      { $match: { _id: new ObjectId(id) } },
+      { $limit: 1 },
+      {
+        $lookup: {
+          from: 'sf_profiles',
+          localField: 'user',
+          foreignField: 'user',
+          as: 'profile',
+        },
+      },
+      { $unwind: '$profile' },
+      {
+        $project: {
+          _id: 1,
+          content: '$content.default',
+          profile: {
+            profileId: '$profile._id',
+            avatar: 1,
+            ring: 1,
+            userName: 1,
+          },
+          createdAt: 1,
+        },
+      },
+    ])
+    .toArray();
+  if (!posts[0]) return null;
+  console.log(posts);
+  return posts[0];
+}
+
 export async function findPostById(db, id) {
   const posts = await db
     .collection('posts')
@@ -20,6 +55,7 @@ export async function findPostById(db, id) {
     ])
     .toArray();
   if (!posts[0]) return null;
+  console.log(posts);
   return posts[0];
 }
 

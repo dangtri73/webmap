@@ -50,6 +50,22 @@
   }
 }
 
+/* Define CSS animation for the custom marker */
+.marker_animation {
+  animation: fadeIn 0.5s ease-in-out forwards; /* Example: Apply a fade-in animation over 1 second */
+  opacity: 1; /* Initially hide the marker */
+}
+
+/* Define the keyframes for the fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0.7;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 /* Container for the marker */
 .custom_marker {
   position: block;
@@ -119,7 +135,7 @@
 /* Define the stroke animation for the circle */
 @keyframes dash {
   from {
-    stroke-dasharray: 50 100;
+    stroke-dasharray: var(--percent, 0) 100;
   }
   to {
     stroke-dasharray: var(--percent, 0) 100;
